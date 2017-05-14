@@ -1,0 +1,45 @@
+{
+  "name": "example",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "dependencies": {
+    "egg": "^1.2.1",
+    "egg-sequelize": "^2.1.4",
+    "egg-view-nunjucks": "^2.1.1",
+    "mysql": "^2.13.0",
+    "sequelize-cli": "^2.7.0"
+  },
+  "devDependencies": {
+    "autod": "^2.8.0",
+    "autod-egg": "^1.0.0",
+    "egg-bin": "^3.3.2",
+    "egg-ci": "^1.6.0",
+    "egg-mock": "^3.5.0",
+    "eslint": "^3.19.0",
+    "eslint-config-egg": "^4.1.0",
+    "webstorm-disable-index": "^1.1.2"
+  },
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "dev": "egg-bin dev",
+    "test": "npm run lint -- --fix && npm run test-local",
+    "test-local": "egg-bin test",
+    "cov": "egg-bin cov",
+    "lint": "eslint .",
+    "ci": "npm run lint && npm run cov",
+    "autod": "autod"
+  },
+  "ci": {
+    "version": "6"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "author": "",
+  "license": "MIT"
+}
