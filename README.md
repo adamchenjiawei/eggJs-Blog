@@ -10,17 +10,18 @@ EggJS+Mysql+sequelize+Bootstrap
 [TOC]
 ## 案例项目Github
 
+git地址： https://github.com/adamchenjiawei/eggJs-Blog
 
-## 环境准备
+## 第一章：环境准备
 
 教程使用系统：macOS （windows系统下命令行使用 Xshell 或者 Cmd）
-开发环境： nodejs 、npm 版本：6.0 以上
+开发环境： nodejs  版本：6.0 以上 、npm
 使用框架： eggjs
-数据库：mysql  版本5.6以上
+数据库：mysql  版本5.5以上
 前端UI框架：Bootstrap
 
 
-### 安装nodeJs
+### 1.1 安装nodeJs
 
 ```
 nodejs官网：http://nodejs.cn/
@@ -29,7 +30,7 @@ nodejs官网：http://nodejs.cn/
 
 ```
 
-### 安装eggjs
+### 1.2 安装eggjs
 
 *tip:  可以给npm替换源，能够更快的安装包*
 ```
@@ -55,6 +56,7 @@ $ nrm use cnpm //switch registry to cnpm
 
 ```
 
+安装Egg
 ```
 // 安装完成 nodejs 之后，npm也安装好了。
 
@@ -63,7 +65,7 @@ npm i egg-init -g
 ```
 
 
-### 安装数据库Mysql
+### 1.3 安装数据库Mysql
 
 官网下载地址：https://dev.mysql.com/downloads/mysql/
 选择对应系统的安装文件。
@@ -82,9 +84,9 @@ mac: `sequel pro`  http://www.pc6.com/mac/133145.html
 windows: `Navicat for Mysql`  http://download.csdn.net/detail/abc_email/9501830
 
 
-## 起步
+## 第二章 起步
 
-### 初始化一个eggJS项目
+### 2.1 初始化一个eggJS项目
 
 ```
 $ egg-init egg-example --type=simple   // 初始化项目
@@ -97,17 +99,18 @@ $ open http://localhost:7001/   // 在浏览器中打开该地址，看到`hi, e
 
 ```
 
-### 添加Sequelize ORM框架
+### 2.2 添加Sequelize ORM框架
 为什么使用：使用orm框架，简化了数据库查询过程。
 官方文档：http://docs.sequelizejs.com/en/v3/
 
 egg-sequelize Github插件： https://github.com/eggjs/egg-sequelize
 sequelize-cli Github插件： https://github.com/sequelize/cli
-1. 添加Sequelize ORM框架
-2. 添加Sequelize-cli 命令台工具（主要使用 migrate功能维护创建数据表结构）
+
+* 添加Sequelize ORM框架
+* 添加Sequelize-cli 命令台工具（主要使用 migrate功能维护创建数据表结构）
 
 **安装**
-1. 安装所需包
+2.2.1. 安装所需包
 ```
 # 以下在项目目录下安装：
 
@@ -122,7 +125,7 @@ $ npm install --save sequelize-cli
 
 **配置插件**
 
-1. 添加egg-sequelize插件配置 (添加以下内容)
+2.2.2. 添加egg-sequelize插件配置 (添加以下内容)
 ```
 // egg-example/config/plugin.js
 
@@ -135,7 +138,7 @@ exports.sequelize = {
 
 ```
 
-2. 配置sequelize-cli 文件目录符合当前项目目录结构
+2.2.3. 配置sequelize-cli 文件目录符合当前项目目录结构
 
 ```
 $ cd egg-example/
@@ -157,7 +160,7 @@ module.exports = {
 
 ```
 
-2. 执行命令自动创建sequelize文件目录结构
+2.2.4. 执行命令自动创建sequelize文件目录结构
 
 ```
 在项目目录下执行： egg-example/
@@ -178,7 +181,7 @@ $ node_modules/.bin/sequelize init
 ```
 
 
-### 连接数据库配置&创建表
+### 2.3 连接数据库配置&创建表
 
 **创建数据库**
 方式一： 通过mysql可视化工具创建数据库，数据库命名： egg_db
@@ -195,7 +198,7 @@ $ node_modules/.bin/sequelize init
 
 **编辑egg-example项目数据库配置**
 
-1、 将 sequelize.js 文件内容清空，写入以下内容
+2.3.1. 将 sequelize.js 文件内容清空，写入以下内容
 ```
 // egg-example/config/sequelize.js
 
@@ -211,7 +214,7 @@ module.exports = {
 
 ```
 
-2、 在 egg-example/config/ 目录下创建以下2个文件
+2.3.2. 在 egg-example/config/ 目录下创建以下2个文件
 `config.local.js`  :开发环境项目启动读取的配置文件
 `config.prod.js`   :生产环境项目启动读取的配置文件
 
@@ -238,7 +241,7 @@ exports.sequelize = {
 
 创建包含title和body的post表
 
-1、创建数据表迁移文件migrate: `20170513152504-create-posts.js`
+2.3.3. 创建数据表迁移文件migrate: `20170513152504-create-posts.js`
 ```
 // app/migrate/20170513152504-create-posts.js
 
@@ -277,7 +280,7 @@ module.exports = {
 
 ```
 
-2、执行migrate命令生成表结构
+2.3.4. 执行migrate命令生成表结构
 ```
 在项目目录下 egg-example/
 
@@ -289,21 +292,21 @@ $  node_modules/.bin/sequelize  db:migrate
 // 数据库中就已经创建好了 posts 表
 ```
 
-### 配置前端渲染模板
+### 2.4 配置前端渲染模板
 
 `
 这里使用的是官方文档案例的模板引擎： Nunjucks
 `
 官方文档：http://mozilla.github.io/nunjucks/api.html
 
-1、安装插件： egg-view-nunjucks
+2.4.1. 安装插件： egg-view-nunjucks
 ```
 // 在项目目录下安装
 
 $ npm i egg-view-nunjucks --save
 ```
 
-2、配置插件
+2.4.2. 配置插件
 开启插件(添加以下配置)
 ```
 // config/plugin.js
@@ -333,7 +336,7 @@ exports.nunjucks = {
 
 ```
 
-## 搭建blog
+## 第三章 搭建blog
 
 搭建blog之前，我们先来了解下eggJs的部分文件目录结构。
 
@@ -369,9 +372,9 @@ egg-example
 * `app/model/**` 用于放置sequelize相关模型。
 * `app/migrate/**` 用于放置sequelize-cli相关数据库迁移文件
 
-### 编写blog模块
+### 3.1 编写blog模块
 
-1、创建controller文件：
+3.1.1. 创建controller文件：
 ```
 // app/controller/post.js
 // 定义一个action：index()
@@ -390,7 +393,7 @@ module.exports = app => {
 
 ```
 
-2、配置router.js
+3.1.2. 配置router.js
 ```
 // app/router.js
 
@@ -405,7 +408,7 @@ module.exports = app => {
 ```
 这样就完成了一个最简单的 Router 定义，当用户执行 `GET /posts`，`app/controller/post.js` 这个里面的 index 方法就会执行。
 
-3、编写view界面
+3.1.3. 编写view界面
 
 新建`app/view/`文件目录
 ```
@@ -427,15 +430,15 @@ module.exports = app => {
 能够看到页面显示 hello blog
 
 
-### 引入Bootstrap
+### 3.2 引入Bootstrap
 
 官网：http://v3.bootcss.com/
 
-1、到官网下载bootstrap
+3.2.1. 到官网下载bootstrap
 
-2、将下载的bootstrap.min.js 、 bootstrap.min.css 拷贝到项目目录下 `app/pulic/`
+3.2.2. 将下载的bootstrap.min.js 、 bootstrap.min.css 拷贝到项目目录下 `app/pulic/`
 
-3、需要调用时在前端页面添加以下标签
+3.2.3. 需要调用时在前端页面添加以下标签
 ```
 <link rel="stylesheet" href="/public/bootstrap.min.css" type="text/css">
 
@@ -443,9 +446,9 @@ module.exports = app => {
 ```
 
 
-### Blog新建内容
+### 3.3 Blog新建内容
 
-1、新建一个view: `new.tpl`
+3.3.1. 新建一个view: `new.tpl`
 
 ```
 // app/view/new.tpl
@@ -476,7 +479,7 @@ module.exports = app => {
 
 ```
 
-2、增加新建blog router设置 (新添加以下内容)
+3.3.2. 增加新建blog router设置 (新添加以下内容)
 ```
 // app/router.js
 
@@ -485,7 +488,7 @@ module.exports = app => {
 
 ```
 
-3、由于需要将数据存入数据库，创建sequelize相关的数据模型
+3.3.3. 由于需要将数据存入数据库，创建sequelize相关的数据模型
 ，操作数据库。
 新建model： `app/model/post.js`
 ```
@@ -521,7 +524,7 @@ module.exports = app => {
 
 ```
 
-4、配置controller，使之能够访问新建blog的页面
+3.3.4. 配置controller，使之能够访问新建blog的页面
 
 新增以下的配置信息
 添加2个action
@@ -544,7 +547,7 @@ create： 添加blog执行的方法，保存之后重定向到 `/posts` 地址
 
 ```
 
-4、新建一个service文件，用来处理存储post数据逻辑。
+3.3.5. 新建一个service文件，用来处理存储post数据逻辑。
 
 a. 在`app/` 下新建目录`service`
 
@@ -569,7 +572,7 @@ module.exports = app => {
 定义的`newPost`方法在controller中的`create` action中调用。
 
 
-5、将我们新建的数据展示出来，修改 `index.tpl`增加列表
+3.3.6. 将我们新建的数据展示出来，修改 `index.tpl`增加列表
 
 ```
 // app/view/index.tpl
@@ -625,7 +628,7 @@ service：`post.js` 新增`list`方法获取post列表
 
 ```
 
-6、验证我们新建blog功能
+3.3.7. 验证我们新建blog功能
 
 a. 打开：http://localhost:7001/posts
 
@@ -636,11 +639,11 @@ c. 创建内容
 b. 验证table列表中是否有新创建的内容。
 
 
-### 查看Blog详情 & 删除Blog数据
+### 3.4 查看Blog详情 & 删除Blog数据
 
 接下来我们来做下Blog的详情查看和删除功能。
 
-1、修改`index.tpl` 页面，增加`详情`&`删除` 按钮。
+3.4.1. 修改`index.tpl` 页面，增加`详情`&`删除` 按钮。
 
 ```
 //  app/view/index.tpl
@@ -697,7 +700,7 @@ b. 验证table列表中是否有新创建的内容。
 
 ```
 
-2、显示Blog详情
+3.4.2. 显示Blog详情
 
 a.  新增页面:`show.tpl`
 
@@ -769,7 +772,7 @@ c. 验证查看详情功能
 打开 http://localhost:7001/posts
 新增一条数据，点击`详情`按钮。
 
-3、删除Blog数据
+3.4.3. 删除Blog数据
 
 a. 配置对应的`router` 和 `controller` 以及数据删除逻辑 `service`
 ```
@@ -843,10 +846,100 @@ c、解决CSRF 校验问题
 Blog简单管理功能就完成了。
 
 
+**tip**
 
-## 开始部署
+最后我们来看下我们的路由配置
 
-### 生产环境部署项目
+```
+// app/router.js
+
+'use strict';
+
+module.exports = app => {
+  app.get('/', 'home.index');
+
+  app.get('/posts', 'post.index');
+  app.get('/posts/new', 'post.new');
+  app.post('/posts', 'post.create');
+  app.delete('/posts/:id', 'post.destroy');
+  app.get('/posts/:id', 'post.show');
+
+  // 也可以使用以下配置替换上面posts的请求
+  // 可以参考 https://eggjs.org/zh-cn/basics/router.html  # RESTful 风格的 URL 定义
+  // app.resources('posts', '/posts', 'post');
+};
+
+
+```
+
+我们也可以用RESTful的风格定义路由。
+
+我们把每个url看做一种资源，对资源不同的操作可以通过HTTP请求方法描述。
+
+| 请求方式 | 操作 |
+| -- | -- |
+| GET（SELECT）| 从服务器取出资源（一项或多项） |
+| POST（CREATE） | 在服务器新建一个资源。 |
+| PUT（UPDATE） | 在服务器更新资源（客户端提供改变后的完整资源）。 |
+| DELETE（DELETE） | 从服务器删除资源。 |
+
+
+Egg的`app.resources('posts', '/posts', 'post');`
+会为我们生产CURD的路由结构，我们只需要在controller添加对应的Action就可以对应到指定的路由地址了。
+| Method | Path | Route Name | Controller.Action |
+| -- | -- |
+| GET |	/posts | posts | app.controllers.posts.index |
+| GET |	/posts/new | new_post |	app.controllers.posts.new |
+| GET | /posts/:id | post |	app.controllers.posts.show |
+| GET |	/posts/:id/edit	| edit_post |	app.controllers.posts.edit |
+| POST | /posts	| posts | app.controllers.posts.create |
+| PUT |	/posts/:id | post |	app.controllers.posts.update |
+| DELETE | 	/posts/:id | 	post |	app.controllers.posts.destroy
+
+
+## 第四章 如何提供API
+
+4.1、 在controller目录下新建一个api文件目录
+新建一个`post.js`
+
+```
+// app/controller/api/post.js
+
+'use strict';
+
+module.exports = app => {
+  class PostController extends app.Controller {
+    * index(ctx) {
+      const posts = yield ctx.service.post.list();
+
+      ctx.body = {status: {code: 0, message: 'success'}, data: posts};
+    }
+  }
+  return PostController;
+};
+
+
+```
+
+4.2、修改Router.js
+
+```
+// app/router.js
+
+app.get('/api/posts', 'api.post.index');
+
+```
+
+4.3、 最后我们来验证一下
+
+首先在http://localhost:7001/posts 新添加几条数据。
+然后访问 http://localhost:7001/api/posts  就能够看到刚刚新添加的JSON数据了。
+
+
+
+## 第五章 开始部署
+
+### 5.1 生产环境部署项目
 
 启动脚本：
 
@@ -931,9 +1024,6 @@ esac
 
 
 ## 本文参考资料
-
-EggJs官方文档：https://eggjs.org/zh-cn/intro/index.html
-
 NodeJS官方网站：http://nodejs.cn/
 
 nrm（npm源管理工具）：http://www.jianshu.com/p/5dd18d246281
@@ -945,6 +1035,8 @@ http://jingyan.baidu.com/article/59a015e34d2b72f7948865cf.html
 http://www.jianshu.com/p/fd3aae701db9
 
 Window下安装Mysql  安装教程：http://blog.csdn.net/zhouzezhou/article/details/52446608
+
+EggJs官方文档：https://eggjs.org/zh-cn/intro/index.html
 
 Sequelize官方文档：http://docs.sequelizejs.com/en/v3/
 
